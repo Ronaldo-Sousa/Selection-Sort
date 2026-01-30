@@ -1,22 +1,23 @@
 #include <stdio.h>
 
-// 1. A FUNÇÃO: Ela automatiza a ordenação
-void selectionSort(int vetor[], int tamanho) {
-    int i, j, menorIndice, aux;
+void imprimirVetor(int vetor[], int tamanho){ //Função simples só para imprimir o vetor, agiliza o processo e facilita a visualização.
+    for(int k = 0; k<tamanho; k++){
+        printf("%d|", vetor[k]);
+    }
+    printf("\n"); //Pula uma linha para deixar mais "limpo".
+}
 
-    // Laço externo: move a "fronteira" do que já está ordenado
-    for (i = 0; i < tamanho - 1; i++) {
-        menorIndice = i; // Começamos assumindo que o i é o menor
-
-        // Laço interno: PROCURA o menor valor no restante do vetor
-        for (j = i + 1; j < tamanho; j++) {
-            if (vetor[j] < vetor[menorIndice]) {
-                menorIndice = j; // Guarda a posição do novo menor encontrado
+void selectionSort(int vetor[], int tamanho){ //Prototipando a função que faz a ordenação.
+    int i, j, aux, menorIndice;
+    
+    for(i = 0; i<tamanho-1; i++){
+        menorIndice = i;
+        for(j = i+1; j<tamanho; j++){
+            if(vetor[j]<vetor[menorIndice]){ //Aqui decidimos se queremos ordenar de forma crescente ou decrescente, onde o símbolo menor seria crescente e maior seria decrescente.
+                menorIndice = j;
             }
         }
-
-        // O IF: Só troca se o menor encontrado não for o que já estava lá
-        if (menorIndice != i) {
+        if(menorIndice != i){ //Aqui é realizada a troca, a variável "menorIndice" é a peça chave da função, garante que o elemento desejado seja o primeiro.
             aux = vetor[i];
             vetor[i] = vetor[menorIndice];
             vetor[menorIndice] = aux;
@@ -24,26 +25,13 @@ void selectionSort(int vetor[], int tamanho) {
     }
 }
 
-// 2. FUNÇÃO AUXILIAR: Apenas para imprimir (para o main ficar limpo)
-void imprimirVetor(int vetor[], int tamanho) {
-    for (int i = 0; i < tamanho; i++) {
-        printf("%d ", vetor[i]);
-    }
-    printf("\n");
-}
-
-int main() {
-    int meuVetor[10] = {50, 10, 80, 30, 20, 70, 40, 90, 100, 60};
-    int tam = 10;
-
-    printf("Antes: ");
+int main(){
+    int meuVetor[] = {50, 70, 30, 40, 20, 80, 5, 60, 90, 10}; //Declarando o vetor com seus elementos.
+    int tam = sizeof(meuVetor)/sizeof(meuVetor[0]); //Usando o "sizeof" para determinar o tamanho do vetor de forma dinâmica em vez de estática, o próprio programa calcula o tamanho do vetor sem termos que dizer.
+    
+    printf("Vetor original: ");
     imprimirVetor(meuVetor, tam);
-
-    // Chamando a automação
     selectionSort(meuVetor, tam);
-
-    printf("Depois: ");
+    printf("Vetor ordenado: ");
     imprimirVetor(meuVetor, tam);
-
-    return 0;
 }
