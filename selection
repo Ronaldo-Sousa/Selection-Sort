@@ -23,15 +23,12 @@ void selectionSort(int vetor[], int tamanho){ //Prototipando a função que faz 
             vetor[menorIndice] = aux;
         }
     }
+    imprimirVetor(vetor, tamanho);
 }
 
 int main(){
     int meuVetor[] = {50, 70, 30, 40, 20, 80, 5, 60, 90, 10}; //Declarando o vetor com seus elementos.
     int tam = sizeof(meuVetor)/sizeof(meuVetor[0]); //Usando o "sizeof" para determinar o tamanho do vetor de forma dinâmica em vez de estática, o próprio programa calcula o tamanho do vetor sem termos que dizer.
     
-    printf("Vetor original: ");
-    imprimirVetor(meuVetor, tam);
     selectionSort(meuVetor, tam);
-    printf("Vetor ordenado: ");
-    imprimirVetor(meuVetor, tam);
 }
